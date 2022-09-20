@@ -8,25 +8,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import fr.istic.taa.jaxrs.domain.Pet;
+import fr.istic.taa.jaxrs.dao.generic.ProfesseurDao;
+import fr.istic.taa.jaxrs.domain.Professeur;
+//import fr.istic.taa.jaxrs.domain.Pet;
 import io.swagger.v3.oas.annotations.Parameter;
 
-@Path("/pet")
-@Produces({"application/json", "application/xml"})
-public class PetResource {
+@Path("/professeur")
+@Produces({"application/json"})
+public class ProfesseurResource {
 
+	ProfesseurDao dao = new ProfesseurDao();
+	
   @GET
-  @Path("/{petId}")
-  public Pet getPetById(@PathParam("petId") Long petId)  {
+  @Path("/{id}")
+  public Professeur getPetById(@PathParam("id") Long petId)  {
       // return pet
-      return new Pet();
+      return dao.findOne(petId);
   }
 
-  @POST
+  /*@POST
   @Consumes("application/json")
   public Response addPet(
       @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
     // add pet
     return Response.ok().entity("SUCCESS").build();
-  }
+  }*/
 }
